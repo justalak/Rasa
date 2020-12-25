@@ -1,0 +1,197 @@
+version: "2.0"
+
+nlu:
+- intent: greet
+  examples: |
+    - hey
+    - Chào
+    - Xin chào
+    - Chào buổi sáng
+    - Chào buổi tối
+    - Chào bạn
+    - Hello
+    - Chào cậu
+    - Chòa buổi chiều
+
+- intent: goodbye
+  examples: |
+    - Tạm biệt
+    - Chào tạm biệt
+    - Tôi đi đây
+    - Gặp lại bạn sau nhé
+    - Chúc bạn một ngày tốt lành
+
+- intent: affirm
+  examples: |
+    - Có
+    - C
+    - Đồng ý
+    - Tất nhiên rồi
+    - Rõ
+    - Nghe ổn đấy
+    - Chính xác
+    - Đúng rồi
+    - Chuẩn
+    - Đúng vậy
+
+- intent: deny
+  examples: |
+    - Không
+    - Ko
+    - Không bao giờ
+    - Tôi không thích điều này
+    - Không thể nào
+    - Không đúng
+    - Tôi không chấp nhận
+
+- intent: ask_particular_price
+  examples: |
+    - Hãy cho tôi biết giá cổ phiếu mới nhất của [AAA](stock_code)
+    - Giá cổ phiếu của [AAV](stock_code) là bao nhiêu
+    - Giá cổ phiếu của [ABC](stock_code)
+    - Tôi muốn biết giá của cổ phiếu [ABI](stock_code)
+    - Giá cổ phiếu hiện tại của [ABS](stock_code)
+    - Giá của cổ phiếu mã [ABT](stock_code) là bao nhiêu
+    
+- intent: ask_particular_assets
+  examples: |
+    - Tài sản hiện tại của [AAA](stock_code) là bao nhiêu
+    - Hiện tại công ty mã cổ phiếu [ABC](stock_code) có tài sản là bao nhiêu 
+    - Giá trị hiện tại của công ty mã [ABC](stock_code)
+    - Tôi muốn biết giá trị tài sản của cổ phiếu [ABI](stock_code)
+    - Tài sản ngắn hạn của cổ phiếu mã [ABS](stock_code)
+    - Tài sản ngắn hạn mới nhất của cố phiếu mã [ABT](stock_code)
+    
+- intent: ask_particular_sale
+  examples: |
+    - Doanh thu của công ty mã [ABC](stock_code) là bao nhiêu
+    - Công ty mã cổ phiếu [ABC](stock_code) có doanh số là bao nhiêu 
+    - Doanh thu mới nhất của công ty mã [ABC](stock_code)
+    - Tôi muốn biết doanh thu của cổ phiếu [ABI](stock_code)
+    - Doanh thu của cổ phiếu mã [ABS](stock_code)
+    - Cho tôi hỏi doanh thu của [ABT](stock_code)
+    - Cho tôi hỏi doanh số của [ABT](stock_code)
+    
+- intent: inform_stock_code
+  examples: |
+    - [ABS](stock_code)
+    - [AAA](stock_code)
+    - [AAV](stock_code)
+    - [ABC](stock_code)
+    - [ABI](stock_code)
+    - [ABS](stock_code)
+    - [APS](stock_code)
+    - [BDG](stock_code)
+    - [BCG](stock_code)
+    - [BTT](stock_code)
+    - [BTV](stock_code)
+    - [CAP](stock_code)
+    - [CAT](stock_code)
+    - [BVS](stock_code)
+    - [BOT](stock_code)
+    - Mã cổ phiếu là [ABT](stock_code)
+    - Mã cổ phiếu là [AAV](stock_code)
+    - Mã cổ phiếu là [BTT](stock_code)
+    - Mã cổ phiếu là [BVS](stock_code)
+    - Mã cổ phiếu là [BOT](stock_code)
+    - Mã cổ phiếu là [BDG](stock_code)
+    
+- intent: mood_unhappy
+  examples: |
+    - my day was horrible
+    - I am sad
+    - I don't feel very well
+    - I am disappointed
+    - super sad
+    - I'm so sad
+    - sad
+    - very sad
+    - unhappy
+    - not good
+    - not very good
+    - extremly sad
+    - so saad
+    - so sad
+
+- intent: bot_challenge
+  examples: |
+    - are you a bot?
+    - are you a human?
+    - am I talking to a bot?
+    - am I talking to a human?
+    
+ 
+- lookup: stock_code
+  examples: |
+    - AAA
+    - AAV
+    - ABC
+    - ABI
+    - ABS
+    - ABT
+    - ACB
+    - ACC
+    - ACE
+    - ACL
+    - ACM
+    - ACV
+    - ADG
+    - ADS
+    - AFX
+    - AGG
+    - AGM
+    - AGR
+    - AMD
+    - AMS
+    - AMV
+    - ANV
+    - APC
+    - APF
+    - APG
+    - APS
+    - ART
+    - ASM
+    - ASP
+    - AST
+    - ATB
+    - ATG
+    - BAB
+    - BAX
+    - BBC
+    - BCC
+    - BCE
+    - BCG
+    - BCM
+    - BDG
+    - BDT
+    - BFC
+    - BHN
+    - BIC
+    - BID
+    - BII
+    - BMC
+    - BMI
+    - BMP
+    - BOT
+    - BPW
+    - BSA
+    - BSI
+    - BSL
+    - BSP
+    - BSR
+    - BTD
+    - BTP
+    - BTT
+    - BTV
+    - BVH
+    - BVS
+    - BWE
+    - C32
+    - C47
+    - C4G
+    - C69
+    - CAP
+    - CAT
+    - CAV
+    - CCL
+

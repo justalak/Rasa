@@ -1,0 +1,46 @@
+version: "2.0"
+
+stories:
+  - story: happy path
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_great
+      - action: utter_happy
+
+  - story: sad path 1
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_unhappy
+      - action: utter_cheer_up
+      - action: utter_did_that_help
+      - intent: affirm
+      - action: utter_happy
+
+  - story: sad path 2
+    steps:
+      - intent: greet
+      - action: utter_greet
+      - intent: mood_unhappy
+      - action: utter_cheer_up
+      - action: utter_did_that_help
+      - intent: deny
+      - action: utter_goodbye
+
+  # - story: Return price
+  #   steps:
+  #     - intent: ask_particular_price
+  #     - slot_was_set:
+  #       - stock_code: None
+  #     - action: utter_ask_particular_stock_code
+  #     - intent: inform_stock_code
+  #     - action: action_request_price
+
+  # - story: Ask particular code
+  #   steps:
+  #     - intent: ask_particular_price
+  #     # - slot_was_set:
+  #       # - stock_code: AAA
+  #     # - intent: inform_stock_code
+  #     - action: action_request_price
