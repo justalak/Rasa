@@ -2,22 +2,18 @@ version: "2.0"
 
 rules:
 
-- rule: Return price 
-  steps:
-  - intent: ask_particular_price
-  - action: action_request_price
+#- rule: Return price
+#  steps:
+#  - intent: ask_particular_price
+#  - action: action_request_price
+#
+#- rule: Return assets
+#  steps:
+#  - intent: ask_particular_assets
+#  - action: action_request_assets
+#
+#- rule: Return sale
+#  steps:
+#  - intent: ask_particular_sale
+#  - action: action_request_sale
 
-- rule: Return assets 
-  steps:
-  - intent: ask_particular_assets
-  - action: action_request_assets
-
-- rule: Return sale
-  steps: 
-  - intent: ask_particular_sale
-  - action: action_request_sale
-
-- rule: Say 'I am a bot' anytime the user challenges
-  steps:
-  - intent: bot_challenge
-  - action: utter_iamabot

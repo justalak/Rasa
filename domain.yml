@@ -19,8 +19,8 @@ entities:
 slots:
   stock_code:
     type: text
-    influence_conversation: true
-  
+    influence_conversation: false
+
 actions:
   - action_request_price
   - action_request_assets
@@ -28,26 +28,36 @@ actions:
 
 responses:
   utter_ask_particular_stock_code:
-    - text: "Hãy nhập mã cổ phiếu bạn cần tìm"
+    - text: "Chúng tôi không tìm thấy dữ liệu 😔 vui lòng nhập lại chính xác mã cổ phiếu cần tìm"
+    - text: "Có thể bạn đã nhập sai mã cổ phiếu. Hãy nhập lại chính xác mã bạn cần tìm 👌"
+    - text: "Mã cố phiếu này không tồn tại 😥 Hãy thử lại với một mã cố phiếu khác"
 
   utter_greet:
-  - text: "Hey! How are you?"
+    - text: "Hey! How are you?"
 
   utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
+    - text: "Here is something to cheer you up:"
+      image: "https://i.imgur.com/nGF1K8f.jpg"
 
   utter_did_that_help:
-  - text: "Did that help you?"
+    - text: "Did that help you?"
 
   utter_happy:
-  - text: "Great, carry on!"
+    - text: "Great, carry on!"
 
   utter_goodbye:
-  - text: "Bye"
+    - text: "Bye"
 
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+  utter_more_info:
+    - text: "Bạn có cần biết thêm thông tin gì không ?"
+
+  utter_answer_price:
+    - text: "Thông tin về giá cổ phiếu mã *{symbol}* cập nhật lúc {time}:\n
+    👉 *Tham chiếu*: {basic_price}\n
+    👉 *Sàn*: {floor_price}\n
+    👉 *Trần*: {ceiling_price}\n
+    👉 *Cao/Thấp*: {high_price}/{low_price}\n
+    👉 *Dao động*: {change_symbol}  {change} / {change_pct}%"
 
 session_config:
   session_expiration_time: 60

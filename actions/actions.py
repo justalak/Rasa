@@ -13,35 +13,33 @@ import requests
 from rasa_sdk import Action, Tracker
 from rasa_sdk.events import SlotSet
 from rasa_sdk.executor import CollectingDispatcher
+from common.price import RequestPrice, constants
 
 
-class ActionRequestPrice(Action):
+# class ActionRequestPrice(Action):
+#
+#     def name(self) -> Text:
+#         return "action_request_price"
+#
+#     def code_string(self, code) -> Text:
+#         return "https://raw.githubusercontent.com/hoanglv-1009/data/master/data/VNX/{}/Price.csv".format(code)
+#
+#     def run(self, dispatcher: CollectingDispatcher,
+#             tracker: Tracker,
+#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+#         stock_code = tracker.get_slot("stock_code")
+#
+#         result = RequestPrice.CurrentPrice(stock_code)
+#
+#         # dispatcher.utter_message("Hello")
+#         dispatcher.utter_message(
+#             template='utter_answer_price',
+#             symbol=stock_code,
+#             basic_price=result[0][constants.PRICE_TYPE_BASIC]
+#         )
+#
+#         return []
 
-    def name(self) -> Text:
-        return "action_request_price"
-
-    def code_string(self, code) -> Text:
-        return "https://raw.githubusercontent.com/hoanglv-1009/data/master/data/VNX/{}/Price.csv".format(code)
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        stock_code = tracker.get_slot("stock_code")
-        print(stock_code)
-        download = requests.get(self.code_string(stock_code))
-        decoded_content = download.content.decode('utf-8')
-        cr = csv.reader(decoded_content.splitlines(), delimiter=',')
-        my_list = list(cr)
-        last_updated = my_list.pop()
-        # print(my_list)
-
-        text = "Cổ phiếu mã  {} cập nhật vào {} có giá là : \nOpen: {}\nHigh: {}\nLow: {}".format(
-            tracker.get_slot("stock_code"), last_updated[0], last_updated[1], last_updated[2], last_updated[3])
-
-        dispatcher.utter_message(text=text)
-
-        return []
 
 class ActionRequestAssets(Action):
 
@@ -49,12 +47,12 @@ class ActionRequestAssets(Action):
         return "action_request_assets"
 
     def code_string(self, code) -> Text:
-        return "https://raw.githubusercontent.com/hoanglv-1009/data/master/data/VNX/{}/BalanceSheetQuarter.csv".format(code)
+        return "https://raw.githubusercontent.com/hoanglv-1009/data/master/data/VNX/{}/BalanceSheetQuarter.csv".format(
+            code)
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         stock_code = tracker.get_slot("stock_code")
         print(stock_code)
         download = requests.get(self.code_string(stock_code))
@@ -71,18 +69,19 @@ class ActionRequestAssets(Action):
 
         return []
 
+
 class ActionRequestSale(Action):
 
     def name(self) -> Text:
         return "action_request_sale"
 
     def code_string(self, code) -> Text:
-        return "https://raw.githubusercontent.com/hoanglv-1009/data/master/data/VNX/{}/IncomeStatementQuarter.csv".format(code)
+        return "https://raw.githubusercontent.com/hoanglv-1009/data/master/data/VNX/{}/IncomeStatementQuarter.csv".format(
+            code)
 
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
         stock_code = tracker.get_slot("stock_code")
         print(stock_code)
         download = requests.get(self.code_string(stock_code))
@@ -93,7 +92,8 @@ class ActionRequestSale(Action):
         # print(my_list)
 
         text = "doanh thu của của {} cập nhật vào quý {} năm {}: \nTổng doanh thu:  {} \nCác khoản giảm trừ: {}\nDoanh thu thuần: {}".format(
-            tracker.get_slot("stock_code"), last_updated[1], last_updated[0], last_updated[2], last_updated[3], last_updated[4])
+            tracker.get_slot("stock_code"), last_updated[1], last_updated[0], last_updated[2], last_updated[3],
+            last_updated[4])
 
         dispatcher.utter_message(text=text)
 
