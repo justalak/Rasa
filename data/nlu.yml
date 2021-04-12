@@ -1,5 +1,4 @@
 version: "2.0"
-
 nlu:
 - intent: greet
   examples: |
@@ -12,7 +11,6 @@ nlu:
     - Hello
     - Chào cậu
     - Chòa buổi chiều
-
 - intent: goodbye
   examples: |
     - Tạm biệt
@@ -20,7 +18,6 @@ nlu:
     - Tôi đi đây
     - Gặp lại bạn sau nhé
     - Chúc bạn một ngày tốt lành
-
 - intent: affirm
   examples: |
     - Có
@@ -33,7 +30,6 @@ nlu:
     - Đúng rồi
     - Chuẩn
     - Đúng vậy
-
 - intent: deny
   examples: |
     - Không
@@ -43,86 +39,103 @@ nlu:
     - Không thể nào
     - Không đúng
     - Tôi không chấp nhận
-
 - intent: ask_particular_price
   examples: |
     - Hãy cho tôi biết giá cổ phiếu mới nhất của [AAA](stock_code)
     - Giá cổ phiếu của [AAV](stock_code) là bao nhiêu
     - Giá cổ phiếu của [ABC](stock_code)
     - Tôi muốn biết giá của cổ phiếu [ABI](stock_code)
+    - Tôi muốn biết giá cổ phiếu [ABI](stock_code)
     - Giá cổ phiếu hiện tại của [ABS](stock_code)
     - Giá của cổ phiếu mã [ABT](stock_code) là bao nhiêu
-    
+    - Giá của cổ phiếu mã [ABT](stock_code)
+    - Giá của cổ phiếu mã [FLC](stock_code)
+    - Giá cổ phiếu mã [ABT](stock_code)c
 - intent: ask_particular_assets
   examples: |
     - Tài sản hiện tại của [AAA](stock_code) là bao nhiêu
-    - Hiện tại công ty mã cổ phiếu [ABC](stock_code) có tài sản là bao nhiêu 
+    - Hiện tại công ty mã cổ phiếu [ABC](stock_code) có tài sản là bao nhiêu
     - Giá trị hiện tại của công ty mã [ABC](stock_code)
     - Tôi muốn biết giá trị tài sản của cổ phiếu [ABI](stock_code)
     - Tài sản ngắn hạn của cổ phiếu mã [ABS](stock_code)
     - Tài sản ngắn hạn mới nhất của cố phiếu mã [ABT](stock_code)
-    
 - intent: ask_particular_sale
   examples: |
     - Doanh thu của công ty mã [ABC](stock_code) là bao nhiêu
-    - Công ty mã cổ phiếu [ABC](stock_code) có doanh số là bao nhiêu 
+    - Công ty mã cổ phiếu [ABC](stock_code) có doanh số là bao nhiêu
     - Doanh thu mới nhất của công ty mã [ABC](stock_code)
     - Tôi muốn biết doanh thu của cổ phiếu [ABI](stock_code)
     - Doanh thu của cổ phiếu mã [ABS](stock_code)
     - Cho tôi hỏi doanh thu của [ABT](stock_code)
     - Cho tôi hỏi doanh số của [ABT](stock_code)
-    
-- intent: inform_stock_code
+- intent: ask_change_price_with_date_range
+  examples: |
+    - Biến động giá cổ phiếu [ABC](stock_code) theo [tháng](date_range) là bao nhiêu
+    - Biến động giá cổ phiếu [FPT](stock_code) theo [năm](date_range) là bao nhiêu
+    - Biến động giá cổ phiếu [FPT](stock_code) theo [quý](date_range) là bao nhiêu
+    - Biến động giá cổ phiếu [FPT](stock_code) theo [quý](date_range)
+    - Biến động giá cổ phiếu [ABC](stock_code) [tháng](date_range) gần đây
+    - Biến động giá cổ phiếu [ABC](stock_code) [tháng](date_range) gần nhất
+    - Biến động giá cổ phiếu [ABC](stock_code) [tháng](date_range)
+    - Giá cổ phiếu [FLC] thay đổi thế nào [năm](date_range)
+    - Giá cổ phiếu [FPT] biến động trong [tháng](date_range)
+
+- intent: inform_stock_name
   examples: |
     - [ABS](stock_code)
     - [AAA](stock_code)
     - [AAV](stock_code)
     - [ABC](stock_code)
     - [ABI](stock_code)
-    - [ABS](stock_code)
-    - [APS](stock_code)
-    - [BDG](stock_code)
-    - [BCG](stock_code)
-    - [BTT](stock_code)
-    - [BTV](stock_code)
-    - [CAP](stock_code)
-    - [CAT](stock_code)
-    - [BVS](stock_code)
-    - [BOT](stock_code)
-    - Mã cổ phiếu là [ABT](stock_code)
-    - Mã cổ phiếu là [AAV](stock_code)
-    - Mã cổ phiếu là [BTT](stock_code)
-    - Mã cổ phiếu là [BVS](stock_code)
-    - Mã cổ phiếu là [BOT](stock_code)
-    - Mã cổ phiếu là [BDG](stock_code)
-    - Mã cổ phiếu [ABT](stock_code)
-    - Cổ phiêu mã [ABT](stock_code)
-    
-- intent: mood_unhappy
-  examples: |
-    - my day was horrible
-    - I am sad
-    - I don't feel very well
-    - I am disappointed
-    - super sad
-    - I'm so sad
-    - sad
-    - very sad
-    - unhappy
-    - not good
-    - not very good
-    - extremly sad
-    - so saad
-    - so sad
 
-- intent: bot_challenge
+- intent: ask_company_info_by_code
+
+- intent: ask_company_info
   examples: |
-    - are you a bot?
-    - are you a human?
-    - am I talking to a bot?
-    - am I talking to a human?
-    
- 
+    - Thông tin công ty [FPT](company_name)
+    - Thông tin tập đoàn [FPT](company_name)
+    - Tôi muốn biết thông tin công ty [viettel](company_name)
+    - Tôi muốn biết thông tin tập đoàn [viettel](company_name)
+    - Hãy giới thiệu về công ty [vingroup](company_name)
+    - Hãy giới thiệu về tập đoàn [vingroup](company_name)
+    - Hồ sơ công ty [vinamilk](company_name)
+    - Hồ sơ tập đoàn [vinamilk](company_name)
+
+- intent: other_information
+  examples: |
+    - Thông tin khác
+    - Tôi muốn biết thông tin khác
+
+- synonym: month
+  examples: |
+    - tháng
+    - 1 tháng
+    - một tháng
+    - tháng này
+    - trong tháng
+- synonym: quarter
+  examples: |
+    - quý
+    - 1 quý
+    - một quý
+    - 3 tháng
+    - trong quý
+    - trong 3 tháng
+- synonym: six_month
+  examples: |
+    - 6 tháng
+    - 2 quý
+    - sáu tháng
+- synonym: year
+  examples: |
+    - năm
+    - 1 năm
+    - một năm
+    - năm nay
+    - trong năm
+- regex: stock_code
+  examples: |
+    - /^[A-Z]{3}/
 - lookup: stock_code
   examples: |
     - AAA

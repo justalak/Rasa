@@ -2,18 +2,36 @@ version: "2.0"
 
 rules:
 
-#- rule: Return price
+#- rule: Ask particular code sad
 #  steps:
-#  - intent: ask_particular_price
-#  - action: action_request_price
-#
-#- rule: Return assets
-#  steps:
-#  - intent: ask_particular_assets
-#  - action: action_request_assets
-#
-#- rule: Return sale
-#  steps:
-#  - intent: ask_particular_sale
-#  - action: action_request_sale
+#    - intent: ask_particular_price
+#    - action: utter_ask_particular_stock_name
+#    - action: ask_company_name
+#    - active_loop: ask_company_name
 
+- rule: Submit stock-company name
+  condition:
+    - active_loop: ask_company_name
+  steps:
+    - action: ask_company_name
+    - active_loop: null
+    - slot_was_set:
+        - requested_slot: null
+    - action: action_request_price_by_company
+    - action: action_deactivate_loop
+
+- rule: Ask for other information
+  steps:
+    - intent: other_information
+    - action: action_reset_slot
+    - action: utter_more_info
+
+- rule: Ask for company information by stock code
+  steps:
+    - intent: ask_company_info_by_code
+    - action: action_get_info
+
+- rule:  Ask for company information by name
+  steps:
+    - intent: ask_company_info
+    - action: action_extract_company_name

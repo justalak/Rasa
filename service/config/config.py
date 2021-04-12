@@ -1,0 +1,3 @@
+IMBB_API_KEY = "ea7c76c5177fab17a81242c472a92179"
+
+IMAGES_DIRECTORY = "images/data/"

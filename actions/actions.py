@@ -10,35 +10,9 @@
 from typing import Any, Text, Dict, List
 import csv
 import requests
+from rasa_sdk.events import SlotSet, AllSlotsReset
 from rasa_sdk import Action, Tracker
-from rasa_sdk.events import SlotSet
 from rasa_sdk.executor import CollectingDispatcher
-from common.price import RequestPrice, constants
-
-
-# class ActionRequestPrice(Action):
-#
-#     def name(self) -> Text:
-#         return "action_request_price"
-#
-#     def code_string(self, code) -> Text:
-#         return "https://raw.githubusercontent.com/hoanglv-1009/data/master/data/VNX/{}/Price.csv".format(code)
-#
-#     def run(self, dispatcher: CollectingDispatcher,
-#             tracker: Tracker,
-#             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-#         stock_code = tracker.get_slot("stock_code")
-#
-#         result = RequestPrice.CurrentPrice(stock_code)
-#
-#         # dispatcher.utter_message("Hello")
-#         dispatcher.utter_message(
-#             template='utter_answer_price',
-#             symbol=stock_code,
-#             basic_price=result[0][constants.PRICE_TYPE_BASIC]
-#         )
-#
-#         return []
 
 
 class ActionRequestAssets(Action):
@@ -98,3 +72,13 @@ class ActionRequestSale(Action):
         dispatcher.utter_message(text=text)
 
         return []
+
+class ActionResetSlot(Action):
+    def name(self) -> Text:
+        return "action_reset_slot"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        return [AllSlotsReset()]

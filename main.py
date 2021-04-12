@@ -1,18 +1,22 @@
 import spacy
-from _datetime import datetime
-import csv
-import requests
-import yaml
-from common import price
-from utils import time_format
+import re
+from underthesea import ner, classify
+from ORMModels import company
+from service.data_process.extractor import *
+# nlp = spacy.load('vi_spacy_model')
+text = "Tôi muốn biết giá cổ phiếu"
+#
+# doc = nlp(text)
+#
+# print(spacy.explain("ccomp"))
+# for token in doc:
+#     print(token.text, token.lemma_, token.pos_, token.tag_, token.dep_,
+#         token.shape_, token.is_alpha, token.is_stop)
+#
+# print(Extractor.extract_company_name(text))
+# res = company.Company.search_by_name("Hoàng anh gia lai")
+# for company in res:
+#     print(company.name)
 
-url = "https://raw.githubusercontent.com/justalak/data/master/data/VNX.csv"
-download = requests.get(url)
-decoded_content = download.content.decode('utf-8')
-cr = csv.reader(decoded_content.splitlines(), delimiter=',')
-result_list = list(cr)
-
-time_str = "22:11:10"
-date_str = "2021-03-15"
-
-print(time_format.TimeHelper.toDisplayText(date_str, time_str))
+for res in ner(text):
+    print(res)

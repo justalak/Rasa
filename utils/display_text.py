@@ -1,4 +1,5 @@
-from common import emoji
+from service.common import emoji
+
 
 class DisplayHelper:
     @staticmethod

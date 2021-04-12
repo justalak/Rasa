@@ -1,14 +1,6 @@
 version: "2.0"
 
 stories:
-  #  - story: Return price
-  #    steps:
-  #      - intent: ask_particular_price
-  #      - slot_was_set:
-  #          - stock_code: None
-  #      - action: utter_ask_particular_stock_code
-  #      - intent: inform_stock_code
-  #      - action: action_request_price
   - story: Ask particular code happy
     steps:
       - intent: ask_particular_price
@@ -19,8 +11,42 @@ stories:
   - story: Ask particular code sad
     steps:
       - intent: ask_particular_price
-      - action: utter_ask_particular_stock_code
-      - intent: inform_stock_code
+      - action: utter_ask_particular_stock_name
+      - action: ask_company_name
+      - active_loop: ask_company_name
+
+  - story: Ask price change
+    steps:
+      - or:
+          - intent: ask_change_price_with_date_range
+            entities:
+              - stock_code: "AAA"
+              - date_range: "month"
+          - intent: ask_change_price_with_date_range
+            entities:
+              - stock_code: "AAA"
+          - intent: ask_change_price_with_date_range
+          - intent: ask_change_price_with_date_range
+            entities:
+              - date_range: "month"
+      - action: action_request_price_change
+
+  - story: Ask company information happy
+    steps:
+      - intent: ask_company_info
+      - action: action_extract_company_name
+
+  - story: Inform stock code happy
+    steps:
+      - checkpoint: check_asked_question_price_changeextext
+      - intent: inform_stock_name
         entities:
           - stock_code: "FLC"
-      - action: action_request_price
+      - action: action_request_price_change
+
+  - story: Inform stock code sad
+    steps:
+      - checkpoint: check_asked_question_price_change
+      - intent: inform_stock_code
+      - action: utter_ask_particular_stock_name
+      - checkpoint: check_asked_question

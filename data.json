@@ -1,0 +1,36 @@
+{
+  'data': {
+    'id': 'fGRGWXz',
+    'title': 'ee977fe490da',
+    'url_viewer': 'https://ibb.co/fGRGWXz',
+    'url': 'https://i.ibb.co/1JVJN0t/ee977fe490da.png',
+    'display_url': 'https://i.ibb.co/k6n6TGs/ee977fe490da.png',
+    'size': 29847,
+    'time': '1616256295',
+    'expiration': '0',
+    'image': {
+      'filename': 'ee977fe490da.png',
+      'name': 'ee977fe490da',
+      'mime': 'image/png',
+      'extension': 'png',
+      'url': 'https://i.ibb.co/1JVJN0t/ee977fe490da.png'
+    },
+    'thumb': {
+      'filename': 'ee977fe490da.png',
+      'name': 'ee977fe490da',
+      'mime': 'image/png',
+      'extension': 'png',
+      'url': 'https://i.ibb.co/fGRGWXz/ee977fe490da.png'
+    },
+    'medium': {
+      'filename': 'ee977fe490da.png',
+      'name': 'ee977fe490da',
+      'mime': 'image/png',
+      'extension': 'png',
+      'url': 'https://i.ibb.co/k6n6TGs/ee977fe490da.png'
+    },
+    'delete_url': 'https://ibb.co/fGRGWXz/6b1d965fff29bf4cfaea9f3c0c51c7d3'
+  },
+  'success': True,
+  'status': 200
+}
