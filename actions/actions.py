@@ -28,7 +28,6 @@ class ActionRequestAssets(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         stock_code = tracker.get_slot("stock_code")
-        print(stock_code)
         download = requests.get(self.code_string(stock_code))
         decoded_content = download.content.decode('utf-8')
         cr = csv.reader(decoded_content.splitlines(), delimiter=',')
@@ -57,13 +56,11 @@ class ActionRequestSale(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         stock_code = tracker.get_slot("stock_code")
-        print(stock_code)
         download = requests.get(self.code_string(stock_code))
         decoded_content = download.content.decode('utf-8')
         cr = csv.reader(decoded_content.splitlines(), delimiter=',')
         my_list = list(cr)
         last_updated = my_list.pop()
-        # print(my_list)
 
         text = "doanh thu của của {} cập nhật vào quý {} năm {}: \nTổng doanh thu:  {} \nCác khoản giảm trừ: {}\nDoanh thu thuần: {}".format(
             tracker.get_slot("stock_code"), last_updated[1], last_updated[0], last_updated[2], last_updated[3],

@@ -1,37 +1,62 @@
 version: "2.0"
-
 rules:
-
-#- rule: Ask particular code sad
-#  steps:
-#    - intent: ask_particular_price
-#    - action: utter_ask_particular_stock_name
-#    - action: ask_company_name
-#    - active_loop: ask_company_name
-
 - rule: Submit stock-company name
   condition:
-    - active_loop: ask_company_name
+  - active_loop: ask_company_name
   steps:
-    - action: ask_company_name
-    - active_loop: null
-    - slot_was_set:
-        - requested_slot: null
-    - action: action_request_price_by_company
-    - action: action_deactivate_loop
-
+  - action: ask_company_name
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_continue_request
+  - action: action_deactivate_loop
 - rule: Ask for other information
   steps:
-    - intent: other_information
-    - action: action_reset_slot
-    - action: utter_more_info
-
+  - intent: other_information
+  - action: action_reset_slot
+  - action: utter_more_info
 - rule: Ask for company information by stock code
   steps:
-    - intent: ask_company_info_by_code
-    - action: action_get_info
-
-- rule:  Ask for company information by name
+  - intent: ask_company_info_by_code
+  - action: action_get_info
+- rule: Ask for company information by name
   steps:
-    - intent: ask_company_info
-    - action: action_extract_company_name
+  - intent: ask_company_info
+  - action: action_extract_company_name
+- rule: Add to watchlist
+  steps:
+  - intent: add_to_watch_list
+  - action: action_add_to_watching_list
+- rule: Remove from watchlist
+  steps:
+  - intent: remove_from_watch_list
+  - action: action_remove_from_watching_list
+- rule: ask for show watching list
+  steps:
+  - intent: ask_show_watch_list
+  - action: action_show_watching_list
+- rule: nlu fallback response
+  steps:
+  - intent: nlu_fallback
+  - action: action_fallback
+- rule: Greeting
+  steps:
+  - intent: greet
+  - action: utter_greeting
+- rule: Ask for other information
+  steps:
+  - intent: ask_guild
+  - action: utter_guildline
+- rule: Ask for financial information
+  steps:
+  - intent: ask_company_financial_indicator
+  - action: action_extract_company_name
+- rule: Ask for business result
+  steps:
+  - intent: ask_business_result
+  - action: action_extract_company_name
+- rule: Ask business result set
+  steps:
+    - intent: ask_show_set_business_result
+    - action: action_evaluate_business
+

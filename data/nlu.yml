@@ -2,15 +2,14 @@ version: "2.0"
 nlu:
 - intent: greet
   examples: |
-    - hey
     - Chào
     - Xin chào
     - Chào buổi sáng
     - Chào buổi tối
-    - Chào bạn
-    - Hello
     - Chào cậu
-    - Chòa buổi chiều
+    - Xin chào bạn
+    - Chào bạn
+    - Bắt đầu
 - intent: goodbye
   examples: |
     - Tạm biệt
@@ -18,18 +17,12 @@ nlu:
     - Tôi đi đây
     - Gặp lại bạn sau nhé
     - Chúc bạn một ngày tốt lành
-- intent: affirm
+- intent: confirm_company_name
   examples: |
-    - Có
-    - C
-    - Đồng ý
-    - Tất nhiên rồi
-    - Rõ
-    - Nghe ổn đấy
     - Chính xác
     - Đúng rồi
-    - Chuẩn
-    - Đúng vậy
+    - Đồng ý
+    - Đúng
 - intent: deny
   examples: |
     - Không
@@ -48,28 +41,12 @@ nlu:
     - Tôi muốn biết giá cổ phiếu [ABI](stock_code)
     - Giá cổ phiếu hiện tại của [ABS](stock_code)
     - Giá của cổ phiếu mã [ABT](stock_code) là bao nhiêu
-    - Giá của cổ phiếu mã [ABT](stock_code)
+    - Hiện tại cổ phiếu [HPG](stock_code) có giá là bao nhiêu
     - Giá của cổ phiếu mã [FLC](stock_code)
-    - Giá cổ phiếu mã [ABT](stock_code)c
-- intent: ask_particular_assets
-  examples: |
-    - Tài sản hiện tại của [AAA](stock_code) là bao nhiêu
-    - Hiện tại công ty mã cổ phiếu [ABC](stock_code) có tài sản là bao nhiêu
-    - Giá trị hiện tại của công ty mã [ABC](stock_code)
-    - Tôi muốn biết giá trị tài sản của cổ phiếu [ABI](stock_code)
-    - Tài sản ngắn hạn của cổ phiếu mã [ABS](stock_code)
-    - Tài sản ngắn hạn mới nhất của cố phiếu mã [ABT](stock_code)
-- intent: ask_particular_sale
-  examples: |
-    - Doanh thu của công ty mã [ABC](stock_code) là bao nhiêu
-    - Công ty mã cổ phiếu [ABC](stock_code) có doanh số là bao nhiêu
-    - Doanh thu mới nhất của công ty mã [ABC](stock_code)
-    - Tôi muốn biết doanh thu của cổ phiếu [ABI](stock_code)
-    - Doanh thu của cổ phiếu mã [ABS](stock_code)
-    - Cho tôi hỏi doanh thu của [ABT](stock_code)
-    - Cho tôi hỏi doanh số của [ABT](stock_code)
+    - Giá cổ phiếu mã [ABT](stock_code)
 - intent: ask_change_price_with_date_range
   examples: |
+    - Biến động giá của [FPT](stock_code)
     - Biến động giá cổ phiếu [ABC](stock_code) theo [tháng](date_range) là bao nhiêu
     - Biến động giá cổ phiếu [FPT](stock_code) theo [năm](date_range) là bao nhiêu
     - Biến động giá cổ phiếu [FPT](stock_code) theo [quý](date_range) là bao nhiêu
@@ -79,7 +56,8 @@ nlu:
     - Biến động giá cổ phiếu [ABC](stock_code) [tháng](date_range)
     - Giá cổ phiếu [FLC] thay đổi thế nào [năm](date_range)
     - Giá cổ phiếu [FPT] biến động trong [tháng](date_range)
-
+    - Biến động giá cổ phiếu [SHB ](stock_code)[6 tháng gần nhất](date_range)
+    - Biến động giá cổ phiếu [HSG](stock_code) [6 tháng gần đây](date_range)
 - intent: inform_stock_name
   examples: |
     - [ABS](stock_code)
@@ -87,25 +65,126 @@ nlu:
     - [AAV](stock_code)
     - [ABC](stock_code)
     - [ABI](stock_code)
-
-- intent: ask_company_info_by_code
-
+    - [VCB](stock_code)
+    - [SAB](stock_code)
+    - [FLC](stock_code)
+    - [VIC](stock_code)
+    - [HPG](stock_code)
+    - [HSG](stock_code)
+    - [TLH](stock_code)
+    - [LPB](stock_code)
+    - [MBB](stock_code)
+    - [MBS](stock_code)
+    - [VPB](stock_code)
+    - [DXG](stock_code)
+    - [BID](stock_code)
+    - [NKG](stock_code)
 - intent: ask_company_info
   examples: |
-    - Thông tin công ty [FPT](company_name)
-    - Thông tin tập đoàn [FPT](company_name)
-    - Tôi muốn biết thông tin công ty [viettel](company_name)
-    - Tôi muốn biết thông tin tập đoàn [viettel](company_name)
-    - Hãy giới thiệu về công ty [vingroup](company_name)
-    - Hãy giới thiệu về tập đoàn [vingroup](company_name)
-    - Hồ sơ công ty [vinamilk](company_name)
-    - Hồ sơ tập đoàn [vinamilk](company_name)
-
+    - Thông tin [công ty FPT](company_name)
+    - Thông tin [công ty Hoàng Anh Gia Lai](company_name)
+    - Thông tin về [công ty Bia Sài Gòn](company_name)
+    - Thông tin về [ngân hàng Vietinbank](company_name)
+    - Thông tin [tập đoàn FPT](company_name)
+    - Tôi muốn biết về thông tin [công ty Viettel](company_name)
+    - Tôi muốn biết thông tin [tập đoàn Viettel](company_name)
+    - Hãy giới thiệu về [công ty Vingroup](company_name)
+    - Hãy giới thiệu về [tập đoàn Vingroup](company_name)
+    - Hồ sơ [công ty Vinamilk](company_name)
+    - Hồ sơ [tập đoàn Vinamilk](company_name)
+    - Thông tin cơ bản của [công ty Vinamilk](company_name)
+    - Tôi muốn biết thông tin cơ bản của [tập đoàn Vingroup](company_name)
+    - Tôi muốn biết thông tin về [công ty Vinamilk](company_name)
+    - Tôi muốn biết thông tin cơ bản của [công ty Vinamilk](company_name)
+- intent: ask_company_financial_indicator
+  examples: |
+    - Chỉ số tài chính của [công ty Hoàng Anh Gia Lai](company_name)
+    - Tôi muốn biết chỉ số tài chính [công ty Vinamilk](company_name)
+    - Các thông số tài chính của [công ty Vingroup](company_name)
+    - Hãy cho tôi biết chỉ số tài chính của [ngân hàng Vietinbank](company_name)
+    - Thông số tài chính của [FPT](company_name)
+    - Hãy cho tôi biết các chỉ số tài chính của công ty Vinamilk
+    - Công ty Vinamilk có các chỉ số tài chính như thế nào
+- intent: add_to_watch_list
+  examples: |
+    - Thêm mã cổ phiếu [FLC](stock_code) vào danh sách theo dõi
+    - Thêm [FLC](stock_code) vào danh sách theo dõi
+    - Tôi muốn thêm mã [FLC](stock_code) vào danh sách theo dõi
+    - Hãy thêm mã [VIC](stock_code) vào danh sách theo dõi
+    - Thêm [VIC](stock_code) vào danh sách theo dõi của tôi
+    - Thêm [VIC](stock_code) vào danh sách quan t
+- intent: remove_from_watch_list
+  examples: |
+    - Gỡ cổ phiếu [FLC](stock_code) khỏi danh sách theo dõi
+    - Không theo dõi cổ phiếu [FLC](stock_code)
+    - Tôi không muốn theo dõi cổ phiếu [FLC](stock_code)
+    - Bỏ cổ phiếu [FLC](stock_code) khỏi danh sách theo dõi của tôi
+    - Hãy gỡ cổ phiếu [FLC](stock_code) khỏi danh sách theo dõi
+    - gỡ cổ phiếu [FLC](stock_code) khỏi danh sách theo dõi của tôi
+    - gỡ mã [FLC](stock_code) khỏi danh sách theo dõi của tôi
+    - Hãy xóa m [FLC](stock_code) khỏi danh sách theo dõi của tôi
+    - Hãy xóa cổ phiếu [FLC](stock_code) khỏi danh sách theo dõi
+    - Tôi muốn xóa mã cổ phiếu [FLC](stock_code) khỏi danh sách theo dõi
+- intent: ask_show_watch_list
+  examples: |
+    - Danh sách theo dõi của tôi
+    - Các cổ phiếu đang theo dõi
+    - Các cổ phiếu tôi đang quan tâm
+    - Danh sách cổ phiếu quan tâm
+    - Danh sách các cổ phiếu đang quan tâm
+- intent: ask_for_other_search_result
+  examples: |
+    - Tôi muốn xem các kết quả khác
+    - Các kết quả tìm kiếm khác
+    - Đây không phải công ty tôi cần tìm
+    - Đây không phải doanh nghiệp tôi cần tìm
 - intent: other_information
   examples: |
     - Thông tin khác
     - Tôi muốn biết thông tin khác
-
+- intent: ask_show_set_business_result
+  examples: |
+    - Biểu đồ biên độ lợi nhuận của [VCB](stock_code)
+- intent: ask_guild
+  examples: |
+    - Hướng dẫn
+    - Hướng dẫn tôi sử dụng Chatbot
+- intent: ask_basic_knowledge
+  examples: |
+    - Làm thế nào để đánh giá một công ty
+    - Làm thế nào để đánh giá một doanh nghiệp
+    - Làm thế nào để đánh giá một cổ phiếu
+- intent: ask_business_result
+  examples: |
+    - Kết quả kinh doanh của [tập đoàn Vingroup](company_name) theo [quý](date_range)
+    - Kết quả kinh doanh của [công ty FLC](company_name) theo [năm](date_range)
+    - Kết quả kinh doanh của [công ty FLC](company_name) [năm](date_range) nay
+    - [Công ty Vinamilk](company_name) có kết quả kinh doanh thế nào
+    - Doanh thu của [công ty Vinamilk](company_name) là bao nhiêu
+    - Doanh thu của [công ty Vinamilk](company_name)
+    - Tôi muốn biết doanh thu của [công ty Vinamilk](company_name) theo [năm](date_range)
+    - Tôi muốn biết kết quả kinh doanh của [tập đoàn Vingroup](company_name) theo [quý](date_range)
+    - [Công ty Vinamilk](company_name) có doanh thu là bao nhiêu
+    - Hãy cho tôi biết kết quả kinh doanh của [tập đoàn Vingroup](company_name) [năm](date_range) nay
+- intent: ask_list_branch
+  examples: |
+    - Danh sách các ngành
+    - Có những ngành nào
+    - Tôi muốn biết có những ngành nào
+    - Các ngành đang có
+    - Doanh nghiệp được chia thành các ngành nào
+    - Các doanh nghiệp được chia thành các ngành nào
+- intent: ask_branch_report
+  examples: |
+    - Tổng hợp kết quả tài chính của ngành [dầu khí](branch)
+    - Tổng hợp thông tin tài chính của ngành [công nghệ thông tin](branch)
+    - Tôi muốn xem tổng hợp thông tin tài chính của ngành [y tế](branch)
+    - Tôi muốn xem tổng hợp kết quả tài chính của ngành [du lịch](branch)
+    - Tổng hợp báo cáo tài chính của ngành [công nghệ thông tin](branch)
+    - Tổng hợp báo cáo tài chính của ngành [y tế](branch)
+    - Kết quả tài chính của ngành [ngân hàng](branch)
+    - Tổng hợp tài chính của ngành [ngân hàng](branch)
+    - Tôi muốn xem tổng hợp báo cáo tài chính của ngành công nghệ thông tin
 - synonym: month
   examples: |
     - tháng
@@ -126,6 +205,8 @@ nlu:
     - 6 tháng
     - 2 quý
     - sáu tháng
+    - 6 tháng gần đây
+    - 6 tháng gần nhất
 - synonym: year
   examples: |
     - năm
@@ -133,9 +214,72 @@ nlu:
     - một năm
     - năm nay
     - trong năm
-- regex: stock_code
+- synonym: '1'
   examples: |
-    - /^[A-Z]{3}/
+    - Dầu khí
+- synonym: '2'
+  examples: |
+    - Hóa chất
+- synonym: '3'
+  examples: |
+    - Tài nguyên cơ bản
+    - Tài nguyên
+- synonym: '4'
+  examples: |
+    - Xây dựng
+    - Vật liệu xây dựng
+- synonym: '5'
+  examples: |
+    - Dịch vụ công nghiệp
+    - Hàng và dịch vụ công nghiệp
+- synonym: '6'
+  examples: |
+    - Ô tô
+- synonym: '7'
+  examples: |
+    - Thực phẩm và đồ uống
+    - Thực phẩm
+- synonym: '8'
+  examples: |
+    - Hàng cá nhân và gia dụng
+    - Hàng hóa
+- synonym: '9'
+  examples: |
+    - Y tế
+- synonym: '10'
+  examples: |
+    - Bán lẻ
+- synonym: '11'
+  examples: |
+    - Truyền thông
+- synonym: '12'
+  examples: |
+    - Viễn thông
+- synonym: '13'
+  examples: |
+    - Du lịch và giải trí
+    - Du lịch
+    - Giải trí
+- synonym: '14'
+  examples: |
+    - Điện nước và xăng dầu
+    - Điện nước
+    - Xăng dầu
+- synonym: '15'
+  examples: |
+    - Ngân hàng
+- synonym: '16'
+  examples: |
+    - Bảo hiểm
+- synonym: '17'
+  examples: |
+    - Bất động sản
+- synonym: '18'
+  examples: |
+    - Dịch vụ tài chính
+- synonym: '19'
+  examples: |
+    - Công nghệ thông tin
 - lookup: stock_code
   examples: |
     - AAA

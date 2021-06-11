@@ -2,6 +2,9 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import SlotSet, AllSlotsReset
+
+import ORMModels.request
+from actions import hook
 from utils import time_format, display_text
 from service.request.get_price import RequestPrice
 from ORMModels.company import *
@@ -23,7 +26,7 @@ class ActionRequestPrice(Action):
                 template='utter_ask_particular_stock_name'
             )
             return []
-
+        sender_id = tracker.current_state()['sender_id']
         result = RequestPrice.CurrentPrice(stock_code)
         date = result[0][constants.DATE]
         time = result[0][constants.TIME]
@@ -47,6 +50,8 @@ class ActionRequestPrice(Action):
             stock_code=stock_code
         )
 
+        hook.after_processed(tracker, "action_request_price")
+
         return []
 
 
@@ -59,7 +64,6 @@ class ActionRequestPriceCheatSheat(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         stock_code = tracker.get_slot("stock_code")
-        print(stock_code)
         date_range = tracker.get_slot("date_range")
         if not stock_code:
             dispatcher.utter_message(
@@ -80,6 +84,7 @@ class ActionRequestPriceCheatSheat(Action):
             template='utter_support_price_date_range'
         )
 
+        hook.after_processed(tracker, "action_request_price_change")
         return [SlotSet("stock_code", stock_code)]
 
 
@@ -122,7 +127,9 @@ class ActionRequestPriceByCompany(Action):
 
         dispatcher.utter_message(
             template='utter_support_after_answer_price',
-            stock_code=company.symbol
+            stock_code=company.symbol,
         )
+
+        hook.after_processed(tracker, "action_request_price_by_company")
 
         return [SlotSet("stock_code", company.symbol)]

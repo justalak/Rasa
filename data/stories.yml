@@ -12,8 +12,6 @@ stories:
     steps:
       - intent: ask_particular_price
       - action: utter_ask_particular_stock_name
-      - action: ask_company_name
-      - active_loop: ask_company_name
 
   - story: Ask price change
     steps:
@@ -38,7 +36,7 @@ stories:
 
   - story: Inform stock code happy
     steps:
-      - checkpoint: check_asked_question_price_changeextext
+      - checkpoint: check_asked_question_price_change
       - intent: inform_stock_name
         entities:
           - stock_code: "FLC"
@@ -49,4 +47,39 @@ stories:
       - checkpoint: check_asked_question_price_change
       - intent: inform_stock_code
       - action: utter_ask_particular_stock_name
-      - checkpoint: check_asked_question
+      - action: ask_company_name
+      - active_loop: ask_company_name
+
+  - story: confirm company result
+    steps:
+      - intent: confirm_company_name
+      - action: action_continue_request
+
+  - story: ask for others company result
+    steps:
+      - intent: ask_for_other_search_result
+      - action: action_show_search_result
+      - intent: inform_stock_name
+        entities:
+          - stock_code: "FLC"
+      - action: action_continue_request
+
+  - story: ask for others company result sad
+    steps:
+      - intent: ask_for_other_search_result
+      - action: action_show_search_result
+      - intent: inform_stock_name
+      - action: ask_company_name
+      - active_loop: ask_company_name
+
+  - story: ask for branch list
+    steps:
+      - intent: ask_list_branch
+      - action: action_get_branch_list
+
+  - story: ask for branch financial report
+    steps:
+      - intent: ask_branch_report
+        entities:
+          - branch: "1"
+      - action: action_get_branch_finance

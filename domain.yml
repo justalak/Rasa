@@ -1,125 +1,290 @@
-version: "2.0"
-
-intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
-  - ask_particular_price
-  - ask_particular_assets
-  - ask_particular_sale
-  - inform_stock_name
-  - ask_change_price_with_date_range
-  - ask_company_info
-  - inform_stock_code
-  - ask_company_info_by_code
-
-entities:
-  - stock_code
-  - date_range
-  - company_name
-
-slots:
-  stock_code:
-    type: text
-    influence_conversation: false
-  date_range:
-    type: text
-  company_name:
-    type: text
-
-actions:
-  - action_request_price
-  - action_request_assets
-  - action_request_sale
-  - action_request_price_change
-  - action_reset_slot
-  - action_request_price_by_company
-  - action_get_info
-  - action_extract_company_name
-
-responses:
-  utter_ask_particular_stock_name:
-    - text: "Chúng tôi không tìm thấy dữ liệu 😔 vui lòng nhập lại chính xác mã cổ phiếu hoặc tên công ty cần tìm"
-    - text: "Có thể bạn đã nhập sai mã cổ phiếu. Hãy nhập lại chính xác mã hoặc tên công ty bạn cần tìm 👌"
-    - text: "Mã cố phiếu này không tồn tại 😥 Hãy thử lại với một mã cổ phiếu hoặc tên công ty khác 😄"
-
-  utter_greet:
-    - text: "Hey! How are you?"
-
-  utter_cheer_up:
-    - text: "Here is something to cheer you up:"
-      image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-    - text: "Did that help you?"
-
-  utter_happy:
-    - text: "Great, carry on!"
-
-  utter_goodbye:
-    - text: "Bye"
-
-  utter_support_after_answer_price:
-    - text: "Bạn có muốn biết thêm các thông tin khác về cổ phiếu, công ty mã *{stock_code}* không 😄"
-      buttons:
-        - title: "👉 Biến động giá"
-          payload: /ask_change_price_with_date_range
-        - title: "👉 Thông tin công ty"
-          payload: /ask_company_info_by_code
-        - title: "👉 Thông tin khác"
-          payload: /other_information
-
-  utter_support_price_date_range:
-    - text: "Bạn có thể tra cứu biến động giá theo các khoảng thời gian khác nhau ⏱ \n
-    👉 Theo tháng \n
-    👉 Theo quý \n
-    👉 Theo 6 tháng gần nhất \n
-    👉 Theo năm"
-
-  utter_more_info:
-    - text: "Bạn có cần biết thêm thông tin gì không ? 🧐"
-    - text: "Bạn có cần trợ giúp thêm thông tin gì không? 🤔"
-    - text: "Rất vui khi được hỗ trợ 😄 Bạn có thêm câu hỏi gì không ?"
-
-  utter_answer_price:
-    - text: "Thông tin về giá cổ phiếu mã *{symbol}* cập nhật lúc {time}:\n
-    👉 *Tham chiếu*: {basic_price}\n
-    👉 *Sàn*: {floor_price}\n
-    👉 *Trần*: {ceiling_price}\n
-    👉 *Cao/Thấp*: {high_price}/{low_price}\n
-    👉 *Dao động*: {change_symbol}  {change} / {change_pct}%"
-
-  utter_answer_price_with_name:
-    - text: "Thông tin về giá cổ phiếu mã *{symbol}* - {company_name} cập nhật lúc {time}:\n
-      👉 *Tham chiếu*: {basic_price}\n
-      👉 *Sàn*: {floor_price}\n
-      👉 *Trần*: {ceiling_price}\n
-      👉 *Cao/Thấp*: {high_price}/{low_price}\n
-      👉 *Dao động*: {change_symbol}  {change} / {change_pct}%"
-
-  utter_answer_price_change:
-    - text: "Biểu đồ biến động giá cổ phiếu *{stock_code}* {date_range_text}:"
-      image: "{chart_image}"
-
-  utter_answer_company_overview:
-    - text: "*{company_name}*\n
-    *Giới thiệu*: {overview}"
-
-  utter_answer_company_basic_info:
-    - text: "*Lĩnh vực ngành*: {classification}\n
-    *Số lượng nhân sự*: {employees}\n
-    *Khối lượng đang niêm yết*: {listing_volume}\n
-    *Ngày niêm yết*: {date_of_issue}"
-
-forms:
-  ask_company_name:
-    company_name:
-      - type: from_text
-
+version: '2.0'
+config:
+  store_entities_as_slots: true
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+intents:
+- greet:
+    use_entities: true
+- goodbye:
+    use_entities: true
+- deny:
+    use_entities: true
+- confirm_company_name:
+    use_entities: true
+- mood_great:
+    use_entities: true
+- mood_unhappy:
+    use_entities: true
+- bot_challenge:
+    use_entities: true
+- ask_particular_price:
+    use_entities: true
+- ask_particular_assets:
+    use_entities: true
+- ask_particular_sale:
+    use_entities: true
+- inform_stock_name:
+    use_entities: true
+- ask_change_price_with_date_range:
+    use_entities: true
+- ask_company_info:
+    use_entities: true
+- inform_stock_code:
+    use_entities: true
+- ask_company_info_by_code:
+    use_entities: true
+- ask_for_other_search_result:
+    use_entities: true
+- add_to_watch_list:
+    use_entities: true
+- remove_from_watch_list:
+    use_entities: true
+- ask_show_watch_list:
+    use_entities: true
+- other_information:
+    use_entities: true
+- nlu_fallback:
+    use_entities: true
+- ask_company_financial_indicator:
+    use_entities: true
+- ask_guild:
+    use_entities: true
+- ask_basic_knowledge:
+    use_entities: true
+- ask_business_result:
+    use_entities: true
+- ask_financial_indicator:
+    use_entities: true
+- ask_list_branch:
+    use_entities: true
+- ask_branch_report:
+    use_entities: true
+- ask_show_set_business_result:
+    use_entities: true
+entities:
+- stock_code
+- date_range
+- company_name
+- branch
+slots:
+  stock_code:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  date_range:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  branch:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  company_name:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  result_list:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  current_intent:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  requested_slot:
+    type: rasa.shared.core.slots.UnfeaturizedSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+responses:
+  utter_ask_particular_stock_name:
+  - text: Chúng tôi không tìm thấy dữ liệu 😔 vui lòng kiểm tra lại chính xác mã cổ phiếu hoặc tên công ty cần tìm
+  - text: Có thể bạn đã nhập sai mã cổ phiếu. Hãy nhập lại chính xác mã hoặc tên công ty bạn cần tìm 👌
+  - text: Mã cố phiếu này không tồn tại 😥 Hãy thử lại với một mã cổ phiếu hoặc tên công ty khác 😄
+  utter_greet:
+  - text: Hey! How are you?
+  utter_cheer_up:
+  - image: https://i.imgur.com/nGF1K8f.jpg
+    text: 'Here is something to cheer you up:'
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Bye
+  utter_ask_exact_code:
+  - text: Bạn hãy nhập chính xác mã của doanh nghiệp bạn cần tìm 🧐
+  utter_support_after_answer_price:
+  - buttons:
+    - payload: /ask_change_price_with_date_range
+      title: 👉 Biến động giá
+    - payload: /ask_company_info_by_code
+      title: 👉 Thông tin công ty
+    - payload: /other_information
+      title: 👉 Thông tin khác
+    text: Bạn có muốn biết thêm các thông tin khác về cổ phiếu, công ty mã *{stock_code}* không 😄
+  utter_support_price_date_range:
+  - text: |-
+      Bạn có thể tra cứu biến động giá theo các khoảng thời gian khác nhau ⏱
+       👉 Theo tháng
+       👉 Theo quý
+       👉 Theo 6 tháng gần nhất
+       👉 Theo năm
+  utter_more_info:
+  - text: Bạn có cần biết thêm thông tin gì không ? 🧐
+  - text: Bạn có cần trợ giúp thêm thông tin gì không? 🤔
+  - text: Rất vui khi được hỗ trợ 😄 Bạn có thêm câu hỏi gì không ?
+  utter_answer_price:
+  - text: |-
+      Thông tin về giá cổ phiếu mã *{symbol}* cập nhật lúc {time}:
+       👉 *Tham chiếu*: {basic_price}
+       👉 *Sàn*: {floor_price}
+       👉 *Trần*: {ceiling_price}
+       👉 *Cao/Thấp*: {high_price}/{low_price}
+       👉 *Dao động*: {change_symbol}  {change} / {change_pct}%
+  utter_answer_price_with_name:
+  - text: |-
+      Thông tin về giá cổ phiếu mã *{symbol}* - {company_name} cập nhật lúc {time}:
+       👉 *Tham chiếu*: {basic_price}
+       👉 *Sàn*: {floor_price}
+       👉 *Trần*: {ceiling_price}
+       👉 *Cao/Thấp*: {high_price}/{low_price}
+       👉 *Dao động*: {change_symbol}  {change} / {change_pct}%
+  utter_answer_price_change:
+  - image: '{chart_image}'
+    text: 'Biểu đồ biến động giá cổ phiếu *{stock_code}* {date_range_text}:'
+  utter_answer_company_overview:
+  - text: |-
+      *{company_name}*
+       *Mã cổ phiếu:* {symbol}
+       *Giới thiệu*: {overview}
+
+       *Lĩnh vực ngành*: {classification}
+       *Số lượng nhân sự*: {employees}
+       *Khối lượng đang niêm yết*: {listing_volume}
+       *Ngày niêm yết*: {date_of_issue}
+  utter_answer_company_financial:
+  - text: |-
+      Các chỉ số tài chính của *{company_name}* như sau:
+      👉 *PE*: {pe}
+      👉 *PS*: {ps}
+      👉 *EPS*: {eps}
+      👉 *PB*: {pb}
+      👉 *ROA*: {roa}
+      👉 *ROE*: {roe}
+      👉 *ROIC*: {roic}
+      👉 *ROCE*: {roce}
+  utter_answer_company_basic_info:
+  - text: |-
+      *Lĩnh vực ngành*: {classification}
+       *Số lượng nhân sự*: {employees}
+       *Khối lượng đang niêm yết*: {listing_volume}
+       *Ngày niêm yết*: {date_of_issue}
+  utter_support_other_search_result:
+  - buttons:
+    - payload: /confirm_company_name
+      title: 👉 Đúng rồi
+    - payload: /ask_for_other_search_result
+      title: 👉 Kết quả khác
+    text: 'Có phải bạn đang tìm *{company_name}* - mã {stock_code} '
+  utter_list_results:
+  - text: '{result_text}'
+  utter_add_to_watch_list_success:
+  - text: Bạn đã thêm mã cổ phiếu *{stock_code}* vào danh sách theo dõi thành công 😉
+  - text: Cổ phiếu *{stock_code}* đã được thêm vào danh sách quan tâm ✅
+  - text: Bạn đã thêm mã *{stock_code}* vào danh sách theo dõi ☑
+  utter_remove_from_watch_list_success:
+  - text: Bạn đã gỡ bỏ mã cổ phiếu *{stock_code}* khỏi danh sách theo dõi thành công 😉
+  - text: Cổ phiếu *{stock_code}* đã được gỡ khỏi danh sách quan tâm ✅
+  - text: Bạn đã gỡ mã *{stock_code}* khỏi danh sách theo dõi 🧐
+  utter_add_to_watch_list_fail:
+  - text: Mã cổ phiếu *{stock_code}* đã có trong danh sách của bạn rồi 🧐
+  - text: Danh sách theo dõi của bạn đã có mã cổ phiếu *{stock_code}* rồi 🤓
+  utter_remove_from_watch_list_fail:
+  - text: Không thể gỡ cổ phiếu *{stock_code}* khỏi danh sách theo dõi. Có thể mã này không có trong danh sách của bạn 🧐
+  - text: Cổ phiếu *{stock_code}* không có trong danh sách theo dõi của bạn ❌
+  utter_ask_for_show_list:
+  - buttons:
+    - payload: /ask_show_watch_list
+      title: 📝 Danh sách
+    text: Bạn có thể xem các mã cổ phiếu đang theo dõi tại  🤓
+  utter_inform_empty_list:
+  - text: Danh sách theo dõi của bạn hiện chưa có cổ phiếu nào 🧐
+  - text: Hiện tại danh sách của bạn không có mã cổ phiếu nào 🧐
+  utter_fallback_response:
+  - text: Xin lỗi, chúng tôi không xử lý được yêu cầu này của bạn ☹. Hãy kiểm tra lại câu hỏi hoặc thử lại với yêu cầu khác.
+  utter_answer_business_result:
+  - text: |-
+      Kết quả kinh doanh của *{company_name}* trong {time} như sau:
+      👉 *Doanh thu thuần*: {sales} tỷ đồng
+      👉 *Lợi nhuận gộp*: {gross_profit} tỷ đồng
+      👉 *Lợi nhuận từ hoạt động KD*: {operating_profit} tỷ đồng
+      👉 *Lợi nhuận sau thuế*: {net_profit} tỷ đồng
+      Bạn có thể tra cứu lợi nhuận, kết quả kinh doanh theo quý hoặc theo năm 🤓
+  utter_refer_business_report:
+  - buttons:
+    - payload: /ask_show_set_business_result{{"stock_code":"{symbol}", "date_range":"{date_range}"}}
+      title: 👍 Đồng ý
+    text: Bạn có muốn xem tổng quan kết quả kinh doanh trong các {date_range} gần đây không 🧐
+  utter_answer_business_set_report:
+  - image: '{image_url}'
+    text: Biên độ lợi nhuận của *{company_name}* được thể hiện qua biểu đồ dưới đây
+  utter_answer_branch_list:
+  - text: |-
+      Các doanh nghiệp được chia thành các ngành sau đây:
+      {branch_list}
+      Bạn có thể xem kết quả tài chính tổng hợp của từng ngành trên đây 🤓
+  utter_answer_branch_finance:
+  - text: |-
+      Các tổng hợp tài chính của chúng tôi về ngành *{branch_name}* như sau:
+      👉 *Số doanh nghiệp niêm yết*: {number_of_companies}
+      👉 *Tăng trưởng lợi nhuận trong năm 2020*: {profit_growth}%
+      👉 *PE bình quân ngành*: {pe_avg}
+      👉 *Đánh giá*: {comment}
+  utter_answer_top_profit:
+  - text: |-
+      Các doanh nghiệp có lợi nhuận cao nhất trong ngành *{branch_name}*:
+      {company_list}
+  utter_greeting:
+  - buttons:
+    - payload: /ask_guild
+      title: Xem hướng dẫn
+    text: Chào bạn, mình là trợ lý ảo Rasa Bot 😄 Rất hân hạnh được giải đáp những những vấn đề liên quan đến chứng khoán của bạn. Bạn có câu hỏi gì không ? 🧐
+  utter_guildline:
+  - text: Tôi có thể trợ giúp bạn các thông tin đến chứng khoán như giá cổ phiếu, biến động giá theo các khoảng thời gian khác nhau. Ngoài ra tôi có thể trợ giúp bạn tra cứu các thông tin liên quan đến doanh nghiệp, lĩnh vực ngành,...  qua đó có thể giúp ích cho các quyết định đầu tư của bạn 😄
+actions:
+- action_request_price
+- action_request_assets
+- action_request_sale
+- action_request_price_change
+- action_reset_slot
+- action_request_price_by_company
+- action_get_info
+- action_extract_company_name
+- action_show_search_result
+- action_continue_request
+- action_unset_stock_code
+- action_set_intent
+- action_add_to_watching_list
+- action_remove_from_watching_list
+- action_show_watching_list
+- action_fallback
+- action_get_financial_indicator
+- action_get_business_result
+- action_evaluate_business
+- action_get_branch_list
+- action_get_branch_finance
+forms:
+  ask_company_name:
+    required_slots:
+      company_name:
+      - type: from_text
+e2e_actions: []

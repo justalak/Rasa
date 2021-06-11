@@ -4,7 +4,6 @@ language: vi
 
 pipeline:
   - name: "SpacyNLP"
-    # language model to load
     model: "vi_spacy_model"
   - name: "SpacyTokenizer"
   - name: "SpacyFeaturizer"
@@ -14,6 +13,8 @@ pipeline:
   - name: "RegexEntityExtractor"
   - name: "EntitySynonymMapper"
   - name: "SklearnIntentClassifier"
+  - name: "FallbackClassifier"
+    threshold: 0.1
 
 policies:
 # # No configuration for policies was provided. The following default policies were used to train your model.
